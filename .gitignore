@@ -1,0 +1,19 @@
+# node.js 패키지
+node_modules/
+
+# firebase 보안 키
+firebase/serviceAccountKey.json
+
+# 환경 변수 파일
+.env
+
+# 운영체제 생성 파일
+.DS_Store
+Thumbs.db
+
+# 빌드 결과물
+build/
+dist/
+
+# IDE 설정 파일
+.vscode/
