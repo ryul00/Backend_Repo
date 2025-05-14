@@ -27,7 +27,7 @@ app.use(express.json());
 
 
 
-// cors 설정정
+// cors 설정
 const cors = require('cors');
 app.use(cors()); // 기본 설정으로 모든 출처 허용
 
@@ -35,8 +35,15 @@ app.use(cors()); // 기본 설정으로 모든 출처 허용
 const authRoutes = require('./routes/auth');
 app.use('/auth', authRoutes);
 
+// 싱글 게임 점수 저장 라우트
+const scoreRoutes = require('./routes/singleGame');
+app.use('/score', scoreRoutes); //  클라이언트 요청 주소와 일치시킴
+
 // 서버 실행 (가장 마지막에 위치!)
 const PORT = 3000;
 app.listen(PORT, () => {
   console.log(`서버 실행 중! http://localhost:${PORT}`);
 });
+
+
+

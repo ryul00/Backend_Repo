@@ -6,7 +6,7 @@ const admin = require('firebase-admin');
 const router = express.Router(); 
 const db = admin.firestore();
 
-const JWT_SECRET = process.env.JWT_SECRET; // 환경 변수에서 JWT_SECRET 불러오기
+const JWT_SECRET = process.env.JWT_SECRET; 
 
 router.post('/login', async (req, res) => {
   const { browserId } = req.body;
