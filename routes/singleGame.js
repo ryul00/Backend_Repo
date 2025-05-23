@@ -7,7 +7,7 @@ const router = express.Router();
 const db = admin.firestore();
 const JWT_SECRET = process.env.JWT_SECRET;
 
-// ✅ 점수 저장 (싱글 / 멀티 구분 지원)
+// 점수 저장 (싱글 / 멀티 구분 지원)
 router.post('/submit', async (req, res) => {
   const authHeader = req.headers.authorization;
   if (!authHeader || !authHeader.startsWith('Bearer ')) {

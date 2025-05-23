@@ -39,6 +39,10 @@ app.use('/auth', authRoutes);
 const scoreRoutes = require('./routes/singleGame');
 app.use('/score', scoreRoutes); //  클라이언트 요청 주소와 일치시킴
 
+// 추가할 멀티플레이 라우트
+const multiplayerRoutes = require('./routes/multiplayer'); 
+app.use('/api', multiplayerRoutes);
+
 // 서버 실행 (가장 마지막에 위치!)
 const PORT = 3000;
 app.listen(PORT, () => {
