@@ -1,7 +1,6 @@
 const express = require('express');
 const jwt = require('jsonwebtoken');
 const admin = require('firebase-admin');
-const { v4: uuidv4 } = require('uuid');
 const { nanoid } = require('nanoid');
 
 const router = express.Router();
@@ -9,6 +8,7 @@ const db = admin.firestore();
 
 const JWT_SECRET = process.env.JWT_SECRET;
 
+// 방 생성
 router.post('/create-room', async (req, res) => {
   const authHeader = req.headers.authorization;
 
@@ -27,18 +27,35 @@ router.post('/create-room', async (req, res) => {
       return res.status(400).json({ success: false, message: 'Invalid token payload' });
     }
 
-    const roomId = nanoid(6); // 예: 'xYp9Jk'
+    // 🔍 host의 닉네임, 캐릭터 불러오기
+    const userDoc = await db.collection('users').doc(hostId).get();
+    if (!userDoc.exists) {
+      return res.status(400).json({ success: false, message: 'Host user not found' });
+    }
+
+    const { nickname: hostNickname, character: hostCharacter } = userDoc.data();
+
+    const validCharacters = ['dog', 'tiger', 'rabbit'];
+    if (!validCharacters.includes(hostCharacter)) {
+      return res.status(400).json({ success: false, message: 'Invalid host character' });
+    }
+
+    const roomId = nanoid(6);
 
     const roomData = {
       hostId,
+      hostNickname,       // ✅ 추가
+      hostCharacter,      // ✅ 추가
       guestId: null,
+      guestNickname: null,
+      guestCharacter: null,
       createdAt: koreaDateTime,
-      status: 'waiting',
+      status: 'waiting'
     };
 
     await db.collection('rooms').doc(roomId).set(roomData);
 
-    const inviteUrl = `https://minimalstudio.diskstation.me:9716/${roomId}`;
+    const inviteUrl = `http://localhost:7456/?roomId=${roomId}`;
 
     res.status(200).json({
       success: true,
@@ -52,6 +69,7 @@ router.post('/create-room', async (req, res) => {
   }
 });
 
+// 방 상태 조회
 router.get('/room-status/:roomId', async (req, res) => {
   const { roomId } = req.params;
 
@@ -64,14 +82,31 @@ router.get('/room-status/:roomId', async (req, res) => {
 
     const data = roomDoc.data();
 
-    res.status(200).json({ success: true, data });
+    // hostNickname/Character 포함
+    let hostInfo = {};
+    if (data?.hostId) {
+      const hostDoc = await db.collection('users').doc(data.hostId).get();
+      if (hostDoc.exists) {
+        const { nickname: hostNickname, character: hostCharacter } = hostDoc.data();
+        hostInfo = { hostNickname, hostCharacter };
+      }
+    }
+
+    res.status(200).json({
+      success: true,
+      data: {
+        ...data,
+        ...hostInfo
+      }
+    });
+
   } catch (err) {
     console.error('room-status 오류:', err.message);
     res.status(500).json({ success: false, message: 'Server error', error: err.message });
   }
 });
 
-
+// 방 입장 (게스트)
 router.post('/join-room/:roomId', async (req, res) => {
   const authHeader = req.headers.authorization;
   const { roomId } = req.params;
@@ -95,13 +130,12 @@ router.post('/join-room/:roomId', async (req, res) => {
 
     const { nickname, character } = userDoc.data();
 
-    // 유효한 캐릭터인지 확인
     const validCharacters = ['dog', 'tiger', 'rabbit'];
     if (!validCharacters.includes(character)) {
       return res.status(400).json({ success: false, message: 'Invalid character' });
     }
 
-    // 방 문서에 게스트 정보 업데이트
+    // 방에 게스트 정보, 호스트 정보 업데이트
     await db.collection('rooms').doc(roomId).update({
       guestId,
       guestNickname: nickname,
@@ -110,13 +144,30 @@ router.post('/join-room/:roomId', async (req, res) => {
       status: 'ready'
     });
 
-    res.status(200).json({ success: true });
+    // Host 정보도 포함
+    const roomDoc = await db.collection('rooms').doc(roomId).get();
+    const roomData = roomDoc.data();
+
+    let hostInfo = {};
+    if (roomData?.hostId) {
+      const hostDoc = await db.collection('users').doc(roomData.hostId).get();
+      if (hostDoc.exists) {
+        const { nickname: hostNickname, character: hostCharacter } = hostDoc.data();
+        hostInfo = { hostNickname, hostCharacter };
+      }
+    }
+
+    res.status(200).json({
+      success: true,
+      guestNickname: nickname,
+      guestCharacter: character,
+      ...hostInfo
+    });
 
   } catch (err) {
     console.error('join-room 실패:', err.message);
     res.status(401).json({ success: false, message: 'Invalid token', error: err.message });
   }
 });
-
 
 module.exports = router;
