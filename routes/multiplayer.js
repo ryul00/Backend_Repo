@@ -44,8 +44,8 @@ router.post('/create-room', async (req, res) => {
 
     const roomData = {
       hostId,
-      hostNickname,       // ✅ 추가
-      hostCharacter,      // ✅ 추가
+      hostNickname,       //  추가
+      hostCharacter,      // 추가
       guestId: null,
       guestNickname: null,
       guestCharacter: null,
@@ -167,6 +167,20 @@ router.post('/join-room/:roomId', async (req, res) => {
   } catch (err) {
     console.error('join-room 실패:', err.message);
     res.status(401).json({ success: false, message: 'Invalid token', error: err.message });
+  }
+});
+
+
+// 입장 완료 후 멀티 게임 선택 화면 이동 -> start-game/:roomId
+router.post('/start-game/:roomId', async (req, res) => {
+  const { roomId } = req.params;
+
+  try {
+    await db.collection('rooms').doc(roomId).update({ status: 'started' });
+    return res.status(200).json({ success: true });
+  } catch (err) {
+    console.error("start-game 실패:", err.message);
+    return res.status(500).json({ success: false, message: '서버 에러', error: err.message });
   }
 });
 
