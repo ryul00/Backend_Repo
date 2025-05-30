@@ -27,7 +27,6 @@ router.post('/create-room', async (req, res) => {
       return res.status(400).json({ success: false, message: 'Invalid token payload' });
     }
 
-    // 🔍 host의 닉네임, 캐릭터 불러오기
     const userDoc = await db.collection('users').doc(hostId).get();
     if (!userDoc.exists) {
       return res.status(400).json({ success: false, message: 'Host user not found' });
@@ -40,17 +39,25 @@ router.post('/create-room', async (req, res) => {
       return res.status(400).json({ success: false, message: 'Invalid host character' });
     }
 
+   // 게임id추출용  
+    const selectedGameSequence = req.body.selectedGameSequence;
+    if (!Array.isArray(selectedGameSequence) || selectedGameSequence.length === 0) {
+      return res.status(400).json({ success: false, message: 'selectedGameSequence is missing or invalid' });
+    }
+
     const roomId = nanoid(6);
 
     const roomData = {
       hostId,
-      hostNickname,       //  추가
-      hostCharacter,      // 추가
+      hostNickname,
+      hostCharacter,
       guestId: null,
       guestNickname: null,
       guestCharacter: null,
       createdAt: koreaDateTime,
-      status: 'waiting'
+      status: 'waiting',
+      selectedGameSequence,       // ✅ 게임 시퀀스 저장
+      currentIndex: 0             // ✅ 현재 게임 순서 트래킹용 필드도 추가
     };
 
     await db.collection('rooms').doc(roomId).set(roomData);
