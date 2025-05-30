@@ -56,8 +56,8 @@ router.post('/create-room', async (req, res) => {
       guestCharacter: null,
       createdAt: koreaDateTime,
       status: 'waiting',
-      selectedGameSequence,       // ✅ 게임 시퀀스 저장
-      currentIndex: 0             // ✅ 현재 게임 순서 트래킹용 필드도 추가
+      selectedGameSequence,       //  게임 시퀀스 저장
+      currentIndex: 0             //  현재 게임 순서 트래킹용 필드도 추가
     };
 
     await db.collection('rooms').doc(roomId).set(roomData);

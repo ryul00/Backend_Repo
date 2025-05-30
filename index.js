@@ -32,18 +32,18 @@ const io = new Server(server, {
 
 // Socket.IO 이벤트 정의
 io.on("connection", (socket) => {
-  console.log("🟢 클라이언트 소켓 연결됨:", socket.id);
+  console.log("클라이언트 소켓 연결됨:", socket.id);
 
   socket.on("join-room", (roomId) => {
     socket.join(roomId);
-    console.log(`👥 ${socket.id} → ${roomId} 방 입장`);
+    console.log(`${socket.id} → ${roomId} 방 입장`);
   });
 
 socket.on("game-event", async (data) => {
   const { type, payload, roomId } = data;
 
   if (!roomId) {
-    console.warn("❌ game-event 수신: roomId 누락");
+    console.warn("game-event 수신: roomId 누락");
     return;
   }
 
@@ -58,7 +58,7 @@ socket.on("game-event", async (data) => {
 
     case "move-scene":
       if (!payload?.sceneName) {
-        console.warn("❌ move-scene emit 실패: sceneName 누락");
+        console.warn("move-scene emit 실패: sceneName 누락");
         return;
       }
       setTimeout(() => {
@@ -77,7 +77,7 @@ case "game-end":
     const roomDoc = await roomRef.get();
 
     if (!roomDoc.exists) {
-      console.warn(`❌ 방 정보 없음: roomId = ${roomId}`);
+      console.warn(`방 정보 없음: roomId = ${roomId}`);
       return;
     }
 
@@ -102,7 +102,7 @@ case "game-end":
     };
 
     await resultRef.set(saveData);
-    console.log(`✅ [${roomId}] ${role} 점수 저장 완료 (gameId: ${gameId})`);
+    console.log(`[${roomId}] ${role} 점수 저장 완료 (gameId: ${gameId})`);
 
     const [hostDoc, guestDoc] = await Promise.all([
       admin.firestore().collection("multiGames").doc(roomId).collection("results").doc("host").get(),
@@ -110,9 +110,9 @@ case "game-end":
     ]);
 
     if (hostDoc.exists && guestDoc.exists) {
-      console.log(`🎯 [${roomId}] host/guest 점수 모두 저장됨 → 결과씬 emit`);
+      console.log(`[${roomId}] host/guest 점수 모두 저장됨 → 결과씬 emit`);
 
-      // ✅ currentIndex +1로 업데이트
+      // currentIndex +1로 업데이트
       await roomRef.update({ currentIndex: currentIndex + 1 });
 
       io.to(roomId).emit("game-event", {
@@ -120,58 +120,58 @@ case "game-end":
         payload: { sceneName: "MultiGameResult" },
       });
     } else {
-      console.log(`⏳ [${roomId}] 한쪽 점수 미도착 → 대기`);
+      console.log(`[${roomId}] 한쪽 점수 미도착 → 대기`);
     }
 
   } catch (err) {
-    console.error(`❌ game-end 처리 중 오류:`, err);
+    console.error(`game-end 처리 중 오류:`, err);
   }
   break;
 
 
     default:
-      console.warn("⚠️ 알 수 없는 game-event type:", type);
+      console.warn("알 수 없는 game-event type:", type);
   }
 });
 
 
 socket.on("leave-room", ({ roomId, playerId }) => {
   if (!roomId) {
-    console.warn(`❌ [leave-room] 요청에 roomId 누락됨. playerId=${playerId}`);
+    console.warn(`[leave-room] 요청에 roomId 누락됨. playerId=${playerId}`);
     return;
   }
 
-  console.log(`📤 [leave-room] 요청 수신: socket=${socket.id}, roomId=${roomId}, playerId=${playerId}`);
+  console.log(` [leave-room] 요청 수신: socket=${socket.id}, roomId=${roomId}, playerId=${playerId}`);
 
   socket.leave(roomId);
-  console.log(`🚪 [leave-room] ${socket.id} → ${roomId} 방 퇴장 완료`);
+  console.log(`[leave-room] ${socket.id} → ${roomId} 방 퇴장 완료`);
 
   db.collection("rooms").doc(roomId).get().then(doc => {
     if (!doc.exists) {
-      console.warn(`⚠️ [leave-room] Firestore 방 문서 없음: roomId=${roomId}`);
+      console.warn(` [leave-room] Firestore 방 문서 없음: roomId=${roomId}`);
       return;
     }
 
     const data = doc.data();
-    console.log(`🗂️ [leave-room] 방 데이터:`, data);
+    console.log(` [leave-room] 방 데이터:`, data);
 
     if (!data.hostId) {
-      console.warn(`⚠️ [leave-room] 방에 hostId 필드 없음`);
+      console.warn(` [leave-room] 방에 hostId 필드 없음`);
       return;
     }
 
     if (data.hostId === playerId) {
-      console.log(`🔴 [leave-room] 호스트(${playerId}) 나감 → 게스트에게 알림`);
+      console.log(` [leave-room] 호스트(${playerId}) 나감 → 게스트에게 알림`);
       io.to(roomId).emit("game-event", {
         type: "host-left",
         payload: { message: "Host has left the room" }
       });
     } else {
-      console.log(`👤 [leave-room] 게스트(${playerId}) 나감. 별도 알림 없음`);
+      console.log(` [leave-room] 게스트(${playerId}) 나감. 별도 알림 없음`);
     }
 
   }).catch(err => {
-    console.error("❌ [leave-room] Firestore 에러:", err.message);
+    console.error(" [leave-room] Firestore 에러:", err.message);
   });
 });
 
@@ -179,7 +179,7 @@ socket.on("leave-room", ({ roomId, playerId }) => {
 
 
   socket.on("disconnect", () => {
-    console.log(`🔴 클라이언트 연결 종료: ${socket.id}`);
+    console.log(` 클라이언트 연결 종료: ${socket.id}`);
   });
 });
 
@@ -187,5 +187,5 @@ socket.on("leave-room", ({ roomId, playerId }) => {
 // 서버 시작
 const PORT = 3000;
 server.listen(PORT, () => {
-  console.log(`✅ 서버 실행 중! http://localhost:${PORT}`);
+  console.log(` 서버 실행 중! http://localhost:${PORT}`);
 });
