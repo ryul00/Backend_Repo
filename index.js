@@ -135,45 +135,50 @@ case "game-end":
 });
 
 
-socket.on("leave-room", ({ roomId, playerId }) => {
+socket.on("leave-room", async ({ roomId, playerId }) => {
+  console.log("[SERVER] leave-room 수신", { roomId, playerId });
   if (!roomId) {
     console.warn(`[leave-room] 요청에 roomId 누락됨. playerId=${playerId}`);
     return;
   }
 
-  console.log(` [leave-room] 요청 수신: socket=${socket.id}, roomId=${roomId}, playerId=${playerId}`);
-
   socket.leave(roomId);
   console.log(`[leave-room] ${socket.id} → ${roomId} 방 퇴장 완료`);
 
-  db.collection("rooms").doc(roomId).get().then(doc => {
+  try {
+    const roomRef = db.collection("rooms").doc(roomId);
+    const doc = await roomRef.get();
     if (!doc.exists) {
       console.warn(` [leave-room] Firestore 방 문서 없음: roomId=${roomId}`);
       return;
     }
 
     const data = doc.data();
-    console.log(` [leave-room] 방 데이터:`, data);
-
     if (!data.hostId) {
       console.warn(` [leave-room] 방에 hostId 필드 없음`);
       return;
     }
 
     if (data.hostId === playerId) {
-      console.log(` [leave-room] 호스트(${playerId}) 나감 → 게스트에게 알림`);
+      // 호스트가 나감 → 방 삭제 + 게스트에게 host-left 알림
       io.to(roomId).emit("game-event", {
         type: "host-left",
         payload: { message: "Host has left the room" }
       });
+      await roomRef.delete();
+      console.log(` [leave-room] 호스트(${playerId}) 나감 → 방 삭제 완료`);
+    } else if (data.guestId === playerId) {
+      // 게스트가 나감 → guestId null 처리
+      await roomRef.update({ guestId: null });
+      console.log(` [leave-room] 게스트(${playerId}) 나감 → guestId null 처리`);
     } else {
-      console.log(` [leave-room] 게스트(${playerId}) 나감. 별도 알림 없음`);
+      console.log(` [leave-room] ${playerId}는 hostId/guestId 둘 다 아님 (무시)`);
     }
-
-  }).catch(err => {
+  } catch (err) {
     console.error(" [leave-room] Firestore 에러:", err.message);
-  });
+  }
 });
+
 
 
 
