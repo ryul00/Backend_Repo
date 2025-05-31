@@ -15,9 +15,9 @@ app.use(cors());
 
 // 라우팅
 app.use('/auth', require('./routes/auth'));
-app.use('/score', require('./routes/singleGame'));
-app.use('/api', require('./routes/multiplayer'));
-app.use('/game', require('./routes/multiGame'));
+app.use('/single', require('./routes/singleGame'));
+app.use('/multi/room', require('./routes/multiplayer'));
+app.use('/multi/game', require('./routes/multiGame'));
 
 // HTTP 서버 생성
 const server = http.createServer(app);

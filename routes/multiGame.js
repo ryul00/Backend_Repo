@@ -11,7 +11,7 @@ const JWT_SECRET = process.env.JWT_SECRET;
 // POST /api/multi/submit
 
 
-router.post('/multi/submit', async (req, res) => {
+router.post('/submit', async (req, res) => {
   const authHeader = req.headers.authorization;
   if (!authHeader || !authHeader.startsWith('Bearer ')) {
     return res.status(401).send({ success: false, message: 'Unauthorized' });
