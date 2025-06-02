@@ -25,10 +25,10 @@ module.exports = (server, db) => {
       switch (type) {
         case "guest-ready":
         case "game-start":
-        case "spawn-mole":
-        case "hit-mole":
+        case "spawn-mole": // 두더지 게임
+        case "hit-mole": // 두더지 게임 
         case "score-update":
-          io.to(roomId).emit("game-event", { type, payload, roomId });
+          socket.to(roomId).emit("game-event", { type, payload, roomId });
           break;
 
         case "move-scene":
