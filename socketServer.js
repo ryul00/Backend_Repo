@@ -88,6 +88,7 @@ module.exports = (server, db) => {
               io.to(roomId).emit("game-event", {
                 type: "move-scene",
                 payload: { sceneName: "MultiGameResult" },
+                roomId,
               });
             } else {
               console.log(`[${roomId}] 한쪽 점수 미도착 → 대기`);
