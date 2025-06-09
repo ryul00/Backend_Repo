@@ -33,6 +33,9 @@ module.exports = (server, db) => {
         case "user-input": 
         case "input-result": 
         case "level-up": 
+        // 숫자 뒤집기 게임
+        case "spawn-question":
+        case "answer-result":
         case "score-update":
           socket.to(roomId).emit("game-event", { type, payload, roomId });
           break;
