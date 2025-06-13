@@ -77,6 +77,7 @@ router.post('/create-room', async (req, res) => {
 });
 
 
+
 // 방 상태 조회
 router.get('/room-status/:roomId', async (req, res) => {
   const { roomId } = req.params;
