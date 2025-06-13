@@ -72,7 +72,7 @@ module.exports = (server, db) => {
             }
 
             const roomData = roomDoc.data();
-            const gameId = roomData.currentSceneName || "UnknownGame"; // 현재 씬 이름이 곧 게임 ID
+            const gameId = roomData.selectedGameId || "UnknownGame"; // 현재 씬 이름이 곧 게임 ID
 
             const resultRef = db
               .collection("multiGames")

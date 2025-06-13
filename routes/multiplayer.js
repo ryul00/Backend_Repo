@@ -40,7 +40,7 @@ router.post('/create-room', async (req, res) => {
       return res.status(400).json({ success: false, message: 'Invalid host character' });
     }
 
-    // ✅ 단일 게임 ID 받기
+    // 단일 게임 ID 받기
     const selectedGameId = req.body.selectedGameId;
     if (typeof selectedGameId !== 'string' || !selectedGameId.trim()) {
       return res.status(400).json({ success: false, message: 'selectedGameId is missing or invalid' });
