@@ -1,18 +1,19 @@
 const express = require('express');
+const admin = require('firebase-admin');
 const http = require('http');
 const cors = require('cors');
+
+// Firebase 초기화
+const serviceAccount = require('./firebase/serviceAccountKey.json');
+admin.initializeApp({ credential: admin.credential.cert(serviceAccount) });
+const db = admin.firestore();
 
 // Express 앱 및 미들웨어
 const app = express();
 app.use(express.json());
 app.use(cors());
 
-// 기본 경로
-app.get('/', (req, res) => {
-  res.send('서버가 정상적으로 작동 중입니다!');
-});
-
-// 라우팅 설정
+// 라우팅
 app.use('/auth', require('./routes/auth'));
 app.use('/single', require('./routes/singleGame'));
 app.use('/multi/room', require('./routes/multiplayer'));
@@ -21,13 +22,15 @@ app.get('/health', (req, res) => {
   res.status(200).send('OK');
 });
 
-// HTTP 서버 생성 (ALB가 HTTPS를 처리하므로 80번 포트에서 리스닝)
+
+// HTTP 서버 생성
 const server = http.createServer(app);
 
-// 서버 시작 (80번 포트에서 HTTP 리스닝)
-server.listen(80, () => {
-  console.log('서버 실행 중! http://localhost:80');
-});
+// **여기만 추가!**
+require('./socketServer')(server, db);
 
-// 소켓 서버 연결
-require('./socketServer')(server);
+// 서버 시작
+const PORT = 3000;
+server.listen(PORT, () => {
+  console.log(`서버 실행 중! http://localhost:${PORT}`);
+});
