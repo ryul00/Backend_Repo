@@ -25,12 +25,12 @@ module.exports = (server, db) => {
       switch (type) {
         case "guest-ready":
         case "game-start":
-        case "spawn-mole": 
-        case "hit-mole": 
-        case "sequence-generated": 
-        case "user-input": 
-        case "input-result": 
-        case "level-up": 
+        case "spawn-mole":
+        case "hit-mole":
+        case "sequence-generated":
+        case "user-input":
+        case "input-result":
+        case "level-up":
         case "spawn-question":
         case "answer-result":
         case "score-update":
@@ -47,6 +47,13 @@ module.exports = (server, db) => {
           try {
             const roomRef = db.collection("rooms").doc(roomId);
             await roomRef.set({ currentSceneName: payload.sceneName }, { merge: true });
+
+            // 선택된 게임 ID를 currentSceneName과 일치하게 설정
+            const gameId = payload.sceneName === 'MultiRememberGameScene' ? 'MultiRememberGameScene' : 'MultiMoleGameScene';
+
+            // Firestore에 게임 ID 저장 (selectedGameId)
+            await roomRef.set({ selectedGameId: gameId }, { merge: true });
+
           } catch (err) {
             console.warn(`Firestore currentSceneName 저장 실패:`, err.message);
           }
@@ -60,6 +67,7 @@ module.exports = (server, db) => {
             });
           }, 1200);
           break;
+
 
         case "game-end":
           try {
