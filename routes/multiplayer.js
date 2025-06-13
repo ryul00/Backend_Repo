@@ -8,6 +8,7 @@ const db = admin.firestore();
 
 const JWT_SECRET = process.env.JWT_SECRET;
 
+
 // 방 생성
 router.post('/create-room', async (req, res) => {
   const authHeader = req.headers.authorization;
@@ -39,10 +40,10 @@ router.post('/create-room', async (req, res) => {
       return res.status(400).json({ success: false, message: 'Invalid host character' });
     }
 
-   // 게임id추출용  
-    const selectedGameSequence = req.body.selectedGameSequence;
-    if (!Array.isArray(selectedGameSequence) || selectedGameSequence.length === 0) {
-      return res.status(400).json({ success: false, message: 'selectedGameSequence is missing or invalid' });
+    // ✅ 단일 게임 ID 받기
+    const selectedGameId = req.body.selectedGameId;
+    if (typeof selectedGameId !== 'string' || !selectedGameId.trim()) {
+      return res.status(400).json({ success: false, message: 'selectedGameId is missing or invalid' });
     }
 
     const roomId = nanoid(6);
@@ -56,8 +57,7 @@ router.post('/create-room', async (req, res) => {
       guestCharacter: null,
       createdAt: koreaDateTime,
       status: 'waiting',
-      selectedGameSequence,       //  게임 시퀀스 저장
-      currentIndex: 0             //  현재 게임 순서 트래킹용 필드도 추가
+      selectedGameId, // 단일 게임 ID 저장
     };
 
     await db.collection('rooms').doc(roomId).set(roomData);
@@ -75,6 +75,7 @@ router.post('/create-room', async (req, res) => {
     res.status(401).json({ success: false, message: 'Invalid token', error: err.message });
   }
 });
+
 
 // 방 상태 조회
 router.get('/room-status/:roomId', async (req, res) => {
