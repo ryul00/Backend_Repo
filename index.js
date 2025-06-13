@@ -18,6 +18,10 @@ app.use('/auth', require('./routes/auth'));
 app.use('/single', require('./routes/singleGame'));
 app.use('/multi/room', require('./routes/multiplayer'));
 app.use('/multi/game', require('./routes/multiGame'));
+app.get('/health', (req, res) => {
+  res.status(200).send('OK');
+});
+
 
 // HTTP 서버 생성
 const server = http.createServer(app);
