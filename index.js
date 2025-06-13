@@ -13,6 +13,10 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
+app.get('/', (req, res) => {
+  res.send('서버가 정상적으로 작동 중입니다!');
+});
+
 // 라우팅
 app.use('/auth', require('./routes/auth'));
 app.use('/single', require('./routes/singleGame'));
