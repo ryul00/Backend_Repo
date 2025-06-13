@@ -17,6 +17,17 @@ app.get('/', (req, res) => {
   res.send('서버가 정상적으로 작동 중입니다!');
 });
 
+// HTTP 요청을 HTTPS로 리다이렉트하는 미들웨어 추가
+if (process.env.NODE_ENV === 'production') {
+  app.use((req, res, next) => {
+    if (req.protocol !== 'https') {
+      return res.redirect(301, 'https://' + req.headers.host + req.url);
+    }
+    next();
+  });
+}
+
+
 // 라우팅
 app.use('/auth', require('./routes/auth'));
 app.use('/single', require('./routes/singleGame'));
