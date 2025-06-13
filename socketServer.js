@@ -14,7 +14,7 @@ module.exports = (server, db) => {
       console.log(`${socket.id} → ${roomId} 방 입장`);
     });
 
-    // 게임 이벤트 처리 (move-scene, 점수 저장 등)
+    // 게임 이벤트 처리
     socket.on("game-event", async (data) => {
       const { type, payload, roomId } = data;
       if (!roomId) {
@@ -25,15 +25,12 @@ module.exports = (server, db) => {
       switch (type) {
         case "guest-ready":
         case "game-start":
-        // 두더지 게임
         case "spawn-mole": 
         case "hit-mole": 
-        //기억력 게임
         case "sequence-generated": 
         case "user-input": 
         case "input-result": 
         case "level-up": 
-        // 숫자 뒤집기 게임
         case "spawn-question":
         case "answer-result":
         case "score-update":
@@ -45,10 +42,21 @@ module.exports = (server, db) => {
             console.warn("move-scene emit 실패: sceneName 누락");
             return;
           }
+
+          // Firestore에 현재 씬 저장
+          try {
+            const roomRef = db.collection("rooms").doc(roomId);
+            await roomRef.set({ currentSceneName: payload.sceneName }, { merge: true });
+          } catch (err) {
+            console.warn(`Firestore currentSceneName 저장 실패:`, err.message);
+          }
+
+          // 1.2초 후 씬 이동 브로드캐스트
           setTimeout(() => {
             io.to(roomId).emit("game-event", {
               type: "move-scene",
               payload,
+              roomId,
             });
           }, 1200);
           break;
@@ -64,9 +72,7 @@ module.exports = (server, db) => {
             }
 
             const roomData = roomDoc.data();
-            const sequence = roomData.selectedGameSequence || [];
-            const currentIndex = roomData.currentIndex || 0;
-            const gameId = sequence[currentIndex] || null;
+            const gameId = roomData.currentSceneName || "UnknownGame"; // 현재 씬 이름이 곧 게임 ID
 
             const resultRef = db
               .collection("multiGames")
@@ -85,7 +91,7 @@ module.exports = (server, db) => {
             await resultRef.set(saveData);
             console.log(`[${roomId}] ${role} 점수 저장 완료 (gameId: ${gameId})`);
 
-            // 두 플레이어 모두 점수 저장 완료 시 결과씬 이동
+            // 양측 점수 도착 시 결과 씬 전송
             const [hostDoc, guestDoc] = await Promise.all([
               db.collection("multiGames").doc(roomId).collection("results").doc("host").get(),
               db.collection("multiGames").doc(roomId).collection("results").doc("guest").get(),
@@ -93,7 +99,6 @@ module.exports = (server, db) => {
 
             if (hostDoc.exists && guestDoc.exists) {
               console.log(`[${roomId}] host/guest 점수 모두 저장됨 → 결과씬 emit`);
-              await roomRef.update({ currentIndex: currentIndex + 1 });
               io.to(roomId).emit("game-event", {
                 type: "move-scene",
                 payload: { sceneName: "MultiGameResult" },
@@ -102,6 +107,7 @@ module.exports = (server, db) => {
             } else {
               console.log(`[${roomId}] 한쪽 점수 미도착 → 대기`);
             }
+
           } catch (err) {
             console.error(`game-end 처리 중 오류:`, err);
           }
@@ -130,13 +136,14 @@ module.exports = (server, db) => {
           console.warn(`[leave-room] Firestore 방 문서 없음: roomId=${roomId}`);
           return;
         }
+
         const data = doc.data();
         if (!data.hostId) {
           console.warn(`[leave-room] 방에 hostId 필드 없음`);
           return;
         }
+
         if (data.hostId === playerId) {
-          // 호스트가 나감 → 방 삭제 + 게스트에게 알림
           io.to(roomId).emit("game-event", {
             type: "host-left",
             payload: { message: "Host has left the room" }
@@ -144,7 +151,6 @@ module.exports = (server, db) => {
           await roomRef.delete();
           console.log(`[leave-room] 호스트(${playerId}) 나감 → 방 삭제 완료`);
         } else if (data.guestId === playerId) {
-          // 게스트가 나감 → guestId null 처리
           await roomRef.update({ guestId: null });
           console.log(`[leave-room] 게스트(${playerId}) 나감 → guestId null 처리`);
         } else {
