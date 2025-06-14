@@ -37,94 +37,94 @@ module.exports = (server, db) => {
           socket.to(roomId).emit("game-event", { type, payload, roomId });
           break;
 
-    case "move-scene":
-      if (!payload?.sceneName) {
-        console.warn("move-scene emit 실패: sceneName 누락");
-        return;
-      }
+        case "move-scene":
+          if (!payload?.sceneName) {
+            console.warn("move-scene emit 실패: sceneName 누락");
+            return;
+          }
 
-      // Firestore에 현재 씬 저장
-      try {
-        const roomRef = db.collection("rooms").doc(roomId);
-        await roomRef.set({ currentSceneName: payload.sceneName }, { merge: true });
+          // Firestore에 현재 씬 저장
+          try {
+            const roomRef = db.collection("rooms").doc(roomId);
+            await roomRef.set({ currentSceneName: payload.sceneName }, { merge: true });
 
-        // 선택된 게임 ID를 currentSceneName과 일치하게 설정
-        const gameId = payload.sceneName;  // sceneName을 그대로 gameId로 설정
-        console.log("[DEBUG] 저장된 gameId:", gameId);
+            // 선택된 게임 ID를 currentSceneName과 일치하게 설정
+            const gameId = payload.sceneName;  // sceneName을 그대로 gameId로 설정
+            console.log("[DEBUG] 저장된 gameId:", gameId);
 
-        // Firestore에 게임 ID 저장 (selectedGameId)
-        await roomRef.set({ selectedGameId: gameId }, { merge: true });
-        console.log("[DEBUG] selectedGameId Firestore에 저장됨:", gameId);
+            // Firestore에 게임 ID 저장 (selectedGameId)
+            await roomRef.set({ selectedGameId: gameId }, { merge: true });
+            console.log("[DEBUG] selectedGameId Firestore에 저장됨:", gameId);
 
-      } catch (err) {
-        console.warn(`Firestore currentSceneName 저장 실패:`, err.message);
-      }
+          } catch (err) {
+            console.warn(`Firestore currentSceneName 저장 실패:`, err.message);
+          }
 
-      // 1.2초 후 씬 이동 브로드캐스트
-      setTimeout(() => {
-        io.to(roomId).emit("game-event", {
-          type: "move-scene",
-          payload,
-          roomId,
-        });
-      }, 1200);
-      break;
+          // 1.2초 후 씬 이동 브로드캐스트
+          setTimeout(() => {
+            io.to(roomId).emit("game-event", {
+              type: "move-scene",
+              payload,
+              roomId,
+            });
+          }, 1200);
+          break;
 
 
-case "game-end":
-  try {
-    const role = payload.isHost ? "host" : "guest";
-    const roomRef = db.collection("rooms").doc(roomId);
-    const roomDoc = await roomRef.get();
-    
-    if (!roomDoc.exists) {
-      console.warn(`방 정보 없음: roomId = ${roomId}`);
-      return;
-    }
+        case "game-end":
+          try {
+            const role = payload.isHost ? "host" : "guest";
+            const roomRef = db.collection("rooms").doc(roomId);
+            const roomDoc = await roomRef.get();
 
-    const roomData = roomDoc.data();
-    // Firestore에서 selectedGameId를 가져와서 게임 종료 시 저장
-    const gameId = roomData.selectedGameId || "UnknownGame"; // 저장된 selectedGameId 사용
-    console.log("[DEBUG] gameId (game-end):", gameId);
+            if (!roomDoc.exists) {
+              console.warn(`방 정보 없음: roomId = ${roomId}`);
+              return;
+            }
 
-    const resultRef = db
-      .collection("multiGames")
-      .doc(roomId)
-      .collection("results")
-      .doc(role);
+            const roomData = roomDoc.data();
+            // Firestore에서 selectedGameId를 가져와서 게임 종료 시 저장
+            const gameId = roomData.selectedGameId || "UnknownGame"; // 저장된 selectedGameId 사용
+            console.log("[DEBUG] gameId (game-end):", gameId);
 
-    const saveData = {
-      gameId, // 정확한 gameId 사용
-      score: payload.score,
-      nickname: payload.nickname,
-      character: payload.character,
-      playedAt: new Date().toLocaleString("sv-SE", { timeZone: "Asia/Seoul" }),
-    };
+            const resultRef = db
+              .collection("multiGames")
+              .doc(roomId)
+              .collection("results")
+              .doc(role);
 
-    await resultRef.set(saveData);
-    console.log(`[${roomId}] ${role} 점수 저장 완료 (gameId: ${gameId})`);
+            const saveData = {
+              gameId, // 정확한 gameId 사용
+              score: payload.score,
+              nickname: payload.nickname,
+              character: payload.character,
+              playedAt: new Date().toLocaleString("sv-SE", { timeZone: "Asia/Seoul" }),
+            };
 
-    // 양측 점수 도착 시 결과 씬 전송
-    const [hostDoc, guestDoc] = await Promise.all([
-      db.collection("multiGames").doc(roomId).collection("results").doc("host").get(),
-      db.collection("multiGames").doc(roomId).collection("results").doc("guest").get(),
-    ]);
+            await resultRef.set(saveData);
+            console.log(`[${roomId}] ${role} 점수 저장 완료 (gameId: ${gameId})`);
 
-    if (hostDoc.exists && guestDoc.exists) {
-      console.log(`[${roomId}] host/guest 점수 모두 저장됨 → 결과씬 emit`);
-      io.to(roomId).emit("game-event", {
-        type: "move-scene",
-        payload: { sceneName: "MultiGameResult" },
-        roomId,
-      });
-    } else {
-      console.log(`[${roomId}] 한쪽 점수 미도착 → 대기`);
-    }
+            // 양측 점수 도착 시 결과 씬 전송
+            const [hostDoc, guestDoc] = await Promise.all([
+              db.collection("multiGames").doc(roomId).collection("results").doc("host").get(),
+              db.collection("multiGames").doc(roomId).collection("results").doc("guest").get(),
+            ]);
 
-  } catch (err) {
-    console.error(`game-end 처리 중 오류:`, err);
-  }
-  break;
+            if (hostDoc.exists && guestDoc.exists) {
+              console.log(`[${roomId}] host/guest 점수 모두 저장됨 → 결과씬 emit`);
+              io.to(roomId).emit("game-event", {
+                type: "move-scene",
+                payload: { sceneName: "MultiGameResult" },
+                roomId,
+              });
+            } else {
+              console.log(`[${roomId}] 한쪽 점수 미도착 → 대기`);
+            }
+
+          } catch (err) {
+            console.error(`game-end 처리 중 오류:`, err);
+          }
+          break;
 
 
         default:
