@@ -62,8 +62,8 @@ router.post('/create-room', async (req, res) => {
 
     await db.collection('rooms').doc(roomId).set(roomData);
 
-    // const inviteUrl = `http://localhost:7456/?roomId=${roomId}`;
-    const inviteUrl = `https://www.smartzoo.net/?roomId=${roomId}`;
+    const inviteUrl = `http://localhost:7456/?roomId=${roomId}`;
+    // const inviteUrl = `https://www.smartzoo.net/?roomId=${roomId}`;
 
 
     res.status(200).json({
