@@ -32,8 +32,8 @@
 
 ### 🌏 Frontend
 
-<p align="left">
-	<img src="https://skillicons.dev/icons?i=react"> <img src="https://skillicons.dev/icons?i=js">
+<p align="center">
+	<img src="https://skillicons.dev/icons?i=cocoscreator"> <img src="https://skillicons.dev/icons?i=ts">
 </p>
 
 ### 🌐 Backend
