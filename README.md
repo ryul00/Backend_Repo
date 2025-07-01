@@ -105,7 +105,7 @@
   </tr>
   <tr>
     <td align="center" style="border: 1px solid #ddd;">
-      <img src="https://github.com/user-attachments/assets/b32de221-f461-4899-8736-0fea09e121e3" width="540px">
+      <img src="https://github.com/user-attachments/assets/b32de221-f461-4899-8736-0fea09e121e3" width="700px">
     </td>
   </tr>
 </table>
@@ -118,7 +118,7 @@
   </tr>
   <tr>
     <td align="center" style="border: 1px solid #ddd;">
-     <img src="https://github.com/user-attachments/assets/63588963-df34-4b87-a00b-dd44cee34e0a" alt="이미지" width="540px">
+     <img src="https://github.com/user-attachments/assets/63588963-df34-4b87-a00b-dd44cee34e0a" alt="이미지" width="700px">
     </td>
   </tr>
 </table>
@@ -131,7 +131,7 @@
   </tr>
   <tr>
     <td align="center" style="border: 1px solid #ddd;">
-      <img src="https://github.com/user-attachments/assets/aa1617ca-48c9-45e3-97dd-0d48a4b86040" width="540px">
+      <img src="https://github.com/user-attachments/assets/aa1617ca-48c9-45e3-97dd-0d48a4b86040" width="700px">
     </td>
   </tr>
 </table>
