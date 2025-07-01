@@ -51,7 +51,7 @@
 ### 💾 Database
 
 <p align="center">
-    <img src="https://skillicons.dev/icons?i=mysql"> <img src="https://skillicons.dev/icons?i=aws">
+    <img src="https://skillicons.dev/icons?i=firebase"> <img src="https://skillicons.dev/icons?i=aws">
 </p>
 
 ### 🚀 Deployment
