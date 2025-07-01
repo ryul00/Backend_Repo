@@ -33,7 +33,7 @@
 ### 🌏 Frontend
 
 <p align="center">
-	<img src="https://cdn.worldvectorlogo.com/logos/cocos-creator-3.svg" width="50"> <img src="https://skillicons.dev/icons?i=ts">
+	<img src="https://cdn.worldvectorlogo.com/logos/cocos-creator-3.svg" width="40"> <img src="https://skillicons.dev/icons?i=ts">
 </p>
 
 ### 🌐 Backend
