@@ -89,7 +89,7 @@
 
 ---
 
-## 📜 API 명세서
+## 📜 Socket.io 기반 실시간 동기화 멀티플레이 로직 코드 정리
 
 🔗 [Socket.io 기반 멀티플레이 로직 코드 정리 파일](https://www.notion.so/Node-js-2238231ecbf680e3adc8c52ebb059683?source=copy_link)
 
