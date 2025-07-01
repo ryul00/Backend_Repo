@@ -10,7 +10,8 @@
 
 |   이름   | [유광렬](https://github.com/ryeol00) | [심희영](https://github.com/heeyoung00)  | [심희영](https://github.com/heeyoung00) | [이유나](https://github.com/2-una) |
 | :------: | :----------------------------------: | :----------------------------------: | :----------------------------------: | :----------------------------------: |
-|  프로필  | <div align="center"><img src="https://avatars.githubusercontent.com/u/129136966?v=4" width="200"/></div> | <div align="center"><img src="https://avatars.githubusercontent.com/u/155427247?v=4" width="200"/></div> | <div align="center"><img src="https://avatars.githubusercontent.com/u/165233927?v=4" width="200"/></div> | <div align="center"><img src="https://avatars.githubusercontent.com/u/165164743?v=4" width="200"/></div> |
+|  프로필  | <div align="center"><img src="https://avatars.githubusercontent.com/u/129136966?v=4" width="200"/></div> | 
+ <div align="center"><img src="https://avatars.githubusercontent.com/u/165233927?v=4" width="200"/></div> | <div align="center"><img src="https://avatars.githubusercontent.com/u/165233927?v=4" width="200"/></div> | <div align="center"><img src="https://avatars.githubusercontent.com/u/165164743?v=4" width="200"/></div> |
 |   역할   | <div align="center"><img src="https://skillicons.dev/icons?i=spring" width="50"/></div> | <div align="center"><img src="https://skillicons.dev/icons?i=react" width="50"/></div> | <div align="center"><img src="https://skillicons.dev/icons?i=react" width="50"/></div> | <div align="center"><img src="https://skillicons.dev/icons?i=figma" width="50"/></div> |
 
 
