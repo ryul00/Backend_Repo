@@ -11,72 +11,7 @@
 |   이름   | [유광렬](https://github.com/ryeol00) | [심희영](https://github.com/heeyoung00) | [송민기](https://github.com/pretty2753) | [장종혁](https://github.com/homilbat) | 원예은 | 정재연 |
 | :------: | :----------------------------------: | :--------------------------------------: | :-------------------------------------: | :-------------------------------------: | :----: | :----: |
 |  프로필  | <div align="center"><img src="https://avatars.githubusercontent.com/u/129136966?v=4" width="200"/></div> | <div align="center"><img src="https://avatars.githubusercontent.com/u/165233927?v=4" width="200"/></div> | <div align="center"><img src="https://avatars.githubusercontent.com/pretty2753?v=4" width="200"/></div> | <div align="center"><img src="https://avatars.githubusercontent.com/homilbat?v=4" width="200"/></div> |  |  |
-|   역할   | <div align="center"><span><img src="https://skillicons.dev/icons?i=nodejs" width="50"/></span> <span><img src="https://cdn.worldvectorlogo.com/logos/cocos-creator-3.svg" width="40"/></span></div> | <div align="center"><span><img src="https://cdn.worldvectorlogo.com/logos/cocos-creator-3.svg" width="40"/></span></div> | <div align="center"><span><img src="https://cdn.worldvectorlogo.com/logos/cocos-creator-3.svg" width="40"/></span></div> | <div align="center"> <span><img src="https://cdn.worldvectorlogo.com/logos/cocos-creator-3.svg" width="40"/></span></div> | <div align="center"><img src="https://skillicons.dev/icons?i=figma" width="50"/></div> | <div align="center"><img src="https://skillicons.dev/icons?i=figma" width="50"/></div> |
-
-
-
-
-
-
-
-
-
-
-
----
-
-## 📝 서비스 소개
-
-현재 대학생, 입문자들이 학교 수업외에 개발 프로젝트를 진행하는데 어려움을 겪는다는 문제점을 공감하게 되었고, 이를 해결하기 위해 <br> 
-**기획/디자인, 백엔드, 프론트엔드 등 각 파트별로 프로젝트 정보를 공유하고, 개발 일정을 체계적으로 관리할 수 있는 커뮤니티 서비스**를 <br>개발하고자 하였다.
-
----
-
-## 🛠️ 사용 기술
-
-### 🌏 Frontend
-
-<p align="center">
-	<img src="https://cdn.worldvectorlogo.com/logos/cocos-creator-3.svg" width="40"> <img src="https://skillicons.dev/icons?i=ts">
-</p>
-
-### 🌐 Backend
-
-<p align="center">
-	<img src="https://skillicons.dev/icons?i=nodejs"> <img src="https://skillicons.dev/icons?i=js">
-</p>
-
-### 🎨 Design
-
-<p align="center">
-	<img src="https://skillicons.dev/icons?i=figma">
-</p>
-
-### 💾 Database
-
-<p align="center">
-    <img src="https://skillicons.dev/icons?i=firebase"> 
-</p>
-
-### 🚀 Deployment
-
-<p align="center">
-    <img src="https://skillicons.dev/icons?i=aws"> <img src="https://skillicons.dev/icons?i=vercel">
-</p>
-
-### 👥 Cooperation
-
-<p align="center">
-    <img src="https://skillicons.dev/icons?i=git"> <img src="https://skillicons.dev/icons?i=github"> <img src="https://skillicons.dev/icons?i=discord">
-</p>
-
----
-
-## 🏆 역할
-
-|    Role     |   Name   | Responsibilities |
-|:-----------:|:--------:|:-----------------|
-| FullStack   | 유광렬   | 싱글/멀티 두더지 게임, 싱글 과일 퍼즐 구현<br/>JWT 기반 브라우저 회원가입/로그인<br/>소켓 기반 멀티플레이 로직 구현<br/>파이어베이스 구축 및 점수 저장 로직 구현<br/>프론트엔드 도메인 배포, 백엔드 서버 배포 |
+|   역할   | <div align="center"><span><img src="https://skillicons.dev/icons?i=nodejs" width="50"/></span> <span><img src="https://cdn.worldvectorlogo.com/logos/cocos-creator-3.svg" width="40"/></span></div> | <div align="center"><span><img src="https://cdn.worldvectorlogo.com/logos/cocos-creator-3.svg" width="40"/></span></div> | <div align="center"><span><img src="https://cdn.worldvectorlogo.com/업<br/> 프론트엔드 도메인 배포, 백엔드 서버 배포 |
 | Frontend    | 심희영   | 와이어프레임 설계<br/>싱글 블록 개수 세기 게임<br/>싱글/멀티 기억력 게임<br/>보고서 작성 및 회의 진행 |
 | Frontend    | 송민기   | 싱글/멀티 숫자 뒤집어 맞추기 게임<br/>싱글 집중력 게임 구현 |
 | Frontend    | 장종혁   | 싱글 미로 게임 구현 |
