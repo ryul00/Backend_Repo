@@ -135,18 +135,6 @@
     </td>
   </tr>
 </table>
-<table align="center" border="1" cellpadding="10" cellspacing="0" style="border-collapse: collapse; border: 1px solid #ddd;">
-  <tr>
-    <td align="center" style="border: 1px solid #ddd;">
-      <strong> OpenAI(ChatGptApi) 기능</strong>
-    </td>
-  </tr>
-  <tr>
-    <td align="center" style="border: 1px solid #ddd;">
-      <img src="https://github.com/user-attachments/assets/1cc32a2f-0e68-4d46-b42a-a387db5def92" width="600px">
-    </td>
-  </tr>
-</table>
 
 ---
 
