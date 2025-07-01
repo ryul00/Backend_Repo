@@ -149,7 +149,7 @@
   <tr>
     <td align="center" style="border: 1px solid #ddd;">
       <a href="https://www.youtube.com/watch?v=odzztOYmLfA&t=23s">
-        <img width="1080px" alt="Image" src="https://github.com/user-attachments/assets/f812d40a-e59a-4226-8f99-951b79039a20" />
+        <img width="720px" alt="Image" src="https://github.com/user-attachments/assets/f812d40a-e59a-4226-8f99-951b79039a20" />
       </a>
     </td>
   </tr>
