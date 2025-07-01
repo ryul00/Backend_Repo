@@ -148,9 +148,7 @@
   </tr>
   <tr>
     <td align="center" style="border: 1px solid #ddd;">
-      <a href="https://www.youtube.com/watch?v=odzztOYmLfA&t=23s">
-        <img src="https://github.com/user-attachments/assets/f812d40a-e59a-4226-8f99-951b79039a20"width="700px">
-      </a>
+	[![데모 시나리오]("https://github.com/user-attachments/assets/630890e7-9023-4505-8ee6-11b95046b47d")](https://www.youtube.com/watch?v=odzztOYmLfA&t=23s)
     </td>
   </tr>
 </table>
