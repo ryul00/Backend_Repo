@@ -8,10 +8,11 @@
 
 ## 🧑‍💻 멤버
 
-|   이름   | [유광렬](https://github.com/ryeol00) | [심희영](https://github.com/heeyoung00) | [장준익](https://github.com/No4hh4oN) | [이유나](https://github.com/2-una) |
-| :------: | :----------------------------------: | :--------------------------------------: | :----------------------------------: | :----------------------------------: |
-|  프로필  | <div align="center"><img src="https://avatars.githubusercontent.com/u/129136966?v=4" width="200"/></div> | <div align="center"><img src="https://avatars.githubusercontent.com/u/165233927?v=4" width="200"/></div> | <div align="center"><img src="https://avatars.githubusercontent.com/u/155427247?v=4" width="200"/></div> | <div align="center"><img src="https://avatars.githubusercontent.com/u/165164743?v=4" width="200"/></div> |
+|   이름   | [유광렬](https://github.com/ryeol00) | [심희영](https://github.com/heeyoung00) | [송민기](https://github.com/pretty2753) | [장종혁](https://github.com/homilbat) |
+| :------: | :----------------------------------: | :--------------------------------------: | :-------------------------------------: | :-------------------------------------: |
+|  프로필  | <div align="center"><img src="https://avatars.githubusercontent.com/u/129136966?v=4" width="200"/></div> | <div align="center"><img src="https://avatars.githubusercontent.com/u/165233927?v=4" width="200"/></div> | <div align="center"><img src="https://avatars.githubusercontent.com/pretty2753?v=4" width="200"/></div> | <div align="center"><img src="https://avatars.githubusercontent.com/homilbat?v=4" width="200"/></div> |
 |   역할   | <div align="center"><span><img src="https://skillicons.dev/icons?i=nodejs" width="50"/></span> <span><img src="https://cdn.worldvectorlogo.com/logos/cocos-creator-3.svg" width="40"/></span></div> | <div align="center"><span><img src="https://cdn.worldvectorlogo.com/logos/cocos-creator-3.svg" width="40"/></span></div> | <div align="center"><span><img src="https://skillicons.dev/icons?i=react" width="50"/></span> <span><img src="https://cdn.worldvectorlogo.com/logos/cocos-creator-3.svg" width="40"/></span></div> | <div align="center"><span><img src="https://skillicons.dev/icons?i=figma" width="50"/></span> <span><img src="https://cdn.worldvectorlogo.com/logos/cocos-creator-3.svg" width="40"/></span></div> |
+
 
 
 
