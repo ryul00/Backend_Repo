@@ -27,13 +27,13 @@
 ### 🌏 Frontend
 
 <p align="center">
-	<img src="https://skillicons.dev/icons?i=react"> <img src="https://skillicons.dev/icons?i=js">
+	<img src="https://cdn.worldvectorlogo.com/logos/cocos-creator-3.svg" width="50"/> <img src="https://skillicons.dev/icons?i=ts">
 </p>
 
 ### 🌐 Backend
 
 <p align="center">
-	<img src="https://skillicons.dev/icons?i=spring"> <img src="https://skillicons.dev/icons?i=java">
+	<img src="https://skillicons.dev/icons?i=node.js"> <img src="https://skillicons.dev/icons?i=js">
 </p>
 
 ### 🎨 Design
@@ -45,13 +45,13 @@
 ### 💾 Database
 
 <p align="center">
-    <img src="https://skillicons.dev/icons?i=mysql"> <img src="https://skillicons.dev/icons?i=aws">
+    <img src="https://skillicons.dev/icons?i=firebase"> 
 </p>
 
 ### 🚀 Deployment
 
 <p align="center">
-    <img src="https://skillicons.dev/icons?i=aws">
+    <img src="https://skillicons.dev/icons?i=aws"> <img src="https://skillicons.dev/icons?i=vercel">
 </p>
 
 ### 👥 Cooperation
