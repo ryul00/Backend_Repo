@@ -39,7 +39,7 @@
 ### 🌐 Backend
 
 <p align="center">
-	<img src="https://skillicons.dev/icons?i=spring"> <img src="https://skillicons.dev/icons?i=java">
+	<img src="https://skillicons.dev/icons?i=nodejs"> <img src="https://skillicons.dev/icons?i=js">
 </p>
 
 ### 🎨 Design
