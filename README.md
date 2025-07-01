@@ -95,12 +95,12 @@
 
 ---
 
-## 💻 웹 서비스 주요 기능
+## 💻 주요 기능 소개
 
 <table align="center" border="1" cellpadding="10" cellspacing="0" style="border-collapse: collapse; border: 1px solid #ddd;">
   <tr>
     <td align="center" style="border: 1px solid #ddd;">
-      <strong>메인 페이지</strong>
+      <strong>BrowserId 기반 로그인</strong>
     </td>
   </tr>
   <tr>
@@ -113,7 +113,7 @@
 <table align="center" border="1" cellpadding="10" cellspacing="0" style="border-collapse: collapse; border: 1px solid #ddd;">
   <tr>
     <td align="center" style="border: 1px solid #ddd;">
-      <strong>일반 게시판</strong>
+      <strong>방 생성 및 초대</strong>
     </td>
   </tr>
   <tr>
@@ -126,7 +126,7 @@
 <table align="center" border="1" cellpadding="10" cellspacing="0" style="border-collapse: collapse; border: 1px solid #ddd;">
   <tr>
     <td align="center" style="border: 1px solid #ddd;">
-      <strong>일정 게시글 작성 페이지 </strong>
+      <strong>연결 후 게임 선택</strong>
     </td>
   </tr>
   <tr>
