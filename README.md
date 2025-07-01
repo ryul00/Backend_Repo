@@ -32,7 +32,7 @@
 
 ### 🌏 Frontend
 
-<p align="center">
+<p align="left">
 	<img src="https://skillicons.dev/icons?i=react"> <img src="https://skillicons.dev/icons?i=js">
 </p>
 
