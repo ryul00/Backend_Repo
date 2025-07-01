@@ -11,12 +11,8 @@
 |   이름   | [유광렬](https://github.com/ryeol00) | [심희영](https://github.com/heeyoung00) | [송민기](https://github.com/pretty2753) | [장종혁](https://github.com/homilbat) | 원예은 | 정재연 |
 | :------: | :----------------------------------: | :--------------------------------------: | :-------------------------------------: | :-------------------------------------: | :----: | :----: |
 |  프로필  | <div align="center"><img src="https://avatars.githubusercontent.com/u/129136966?v=4" width="200"/></div> | <div align="center"><img src="https://avatars.githubusercontent.com/u/165233927?v=4" width="200"/></div> | <div align="center"><img src="https://avatars.githubusercontent.com/pretty2753?v=4" width="200"/></div> | <div align="center"><img src="https://avatars.githubusercontent.com/homilbat?v=4" width="200"/></div> |  |  |
-|   역할   | <div align="center"><span><img src="https://skillicons.dev/icons?i=nodejs" width="50"/></span> <span><img src="https://cdn.worldvectorlogo.com/logos/cocos-creator-3.svg" width="40"/></span></div> | <div align="center"><span><img src="https://cdn.worldvectorlogo.com/logos/cocos-creator-3.svg" width="40"/></span></div> | <div align="center"><span><img src="https://cdn.worldvectorlogo.com/업<br/> 프론트엔드 도메인 배포, 백엔드 서버 배포 |
-| Frontend    | 심희영   | 와이어프레임 설계<br/>싱글 블록 개수 세기 게임<br/>싱글/멀티 기억력 게임<br/>보고서 작성 및 회의 진행 |
-| Frontend    | 송민기   | 싱글/멀티 숫자 뒤집어 맞추기 게임<br/>싱글 집중력 게임 구현 |
-| Frontend    | 장종혁   | 싱글 미로 게임 구현 |
-| Design      | 원예은   | 로그인, 메인 화면, 싱글 게임 디자인 |
-| Design      | 정재연   | 마이 페이지, 멀티 게임 디자인 |
+|   역할   | <div align="center"><span><img src="https://skillicons.dev/icons?i=nodejs" width="50"/></span> <span><img src="https://cdn.worldvectorlogo.com/logos/cocos-creator-3.svg" width="40"/></span></div> | <div align="center"><span><img src="https://cdn.worldvectorlogo.com/logos/cocos-creator-3.svg" width="40"/></span></div> | <div align="center"> <span><img src="https://cdn.worldvectorlogo.com/logos/cocos-creator-3.svg" width="40"/></span></div> | <div align="center"> <span><img src="https://cdn.worldvectorlogo.com/logos/cocos-creator-3.svg" width="40"/></span></div> | <div align="center"><img src="https://skillicons.dev/icons?i=figma" width="50"/></div> | <div align="center"><img src="https://skillicons.dev/icons?i=figma" width="50"/></div> |
+
 
 
 
