@@ -33,7 +33,7 @@
 ### 🌏 Frontend
 
 <p align="center">
-	<img src="https://upload.wikimedia.org/wikipedia/commons/4/40/Cocos-logo.png"> <img src="https://skillicons.dev/icons?i=ts">
+	<img src="https://cdn.worldvectorlogo.com/logos/cocos-1.svg"> <img src="https://skillicons.dev/icons?i=ts">
 </p>
 
 ### 🌐 Backend
