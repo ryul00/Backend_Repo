@@ -27,13 +27,13 @@
 ### 🌏 Frontend
 
 <p align="center">
-	<img src="https://cdn.worldvectorlogo.com/logos/cocos-creator-3.svg" width="50"/> <img src="https://skillicons.dev/icons?i=ts">
+	<img src="https://cdn.worldvectorlogo.com/logos/cocos-creator-3.svg" width="40"/> <img src="https://skillicons.dev/icons?i=ts">
 </p>
 
 ### 🌐 Backend
 
 <p align="center">
-	<img src="https://skillicons.dev/icons?i=node.js"> <img src="https://skillicons.dev/icons?i=js">
+	<img src="https://skillicons.dev/icons?i=nodejs"> <img src="https://skillicons.dev/icons?i=js">
 </p>
 
 ### 🎨 Design
